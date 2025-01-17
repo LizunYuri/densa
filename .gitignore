@@ -1,0 +1,45 @@
+# Игнорирование файлов виртуальной среды Python
+**/venv/
+**/env/
+**/myvenv/
+**/.venv/
+**/.env/
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/*.pyd
+/env
+
+# Игнорирование системных файлов
+.DS_Store
+Thumbs.db
+
+# Игнорирование файлов конфигурации IDE
+**/.vscode/
+**/.idea/
+
+# Файлы настроек и миграций Django
+**/*.env
+**/*.log
+
+# Резервные и временные файлы
+**/*.bak
+**/*.tmp
+
+# Игнорирование файлов зависимостей React
+**/node_modules/
+**/.pnp/
+**/.pnp.js
+
+# Игнорирование файлов тестирования React
+**/coverage/
+
+# Игнорирование production-файлов React
+**/build/
+
+# Прочие системные файлы и логи
+**/npm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*
+**/.DS_Store
+**/.env.local
