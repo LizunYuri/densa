@@ -4,6 +4,8 @@ from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from sqlalchemy.ext.asyncio import AsyncSession
 from .database import Database
+from app.auth import router as auth_router
+# from app.auth import 
 
 app = FastAPI()
 
@@ -24,13 +26,8 @@ async def startup():
 async def shutdown():
     await db.close()
 
+app.include_router(auth_router, prefix="/auth", tags=['Authentification'])
 
-
-# @app.get("/db")
-# async def read_db_data():
-#     """Пример асинхронного запроса к базе данных"""
-#     result = await db.execute("SELECT NOW();")  # Запрос для проверки
-#     return {"message": "Data from MySQL", "result": result}
 
 @app.get('/', response_class=HTMLResponse)
 def read_root(request: Request):

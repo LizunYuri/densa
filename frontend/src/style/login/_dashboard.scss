@@ -1,0 +1,95 @@
+.dashboard{
+    &_container{
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        position: relative;
+    }
+    &_panel{
+        width: 250px;
+        height: 100vh;
+        box-shadow: 4px 7px 12px -3px black;
+        position: fixed;
+        top: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+    }
+    &_btn{
+        width: 90%;
+        height: 45px;
+        margin-top: 12px;
+        margin-bottom: 12px;
+        border: 1px solid rgba(0, 0, 0, 0.192);
+        padding-top: 8px;
+        padding-bottom: 8px;
+        font-size: 18px;
+        cursor: pointer;
+        transition: all .3s ease;
+        text-align: center;
+        color: black;
+        &:hover{
+            background: rgba(0, 0, 0, 0.192);
+        }
+    }
+    &_nav{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        height: 100%;
+        padding-top: 36px;
+        & > h2{
+            text-align: center;
+            padding-bottom: 26px;
+        }
+        &_btn{
+            width: 100%;
+            height: 45px;
+            margin: 2px;
+            border: 1px solid rgba(0, 0, 0, 0.192);
+            padding-top: 8px;
+            padding-right: 12px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all .3s ease;
+            text-align: right;
+            color: black;
+            &:hover{
+                background: rgba(0, 0, 0, 0.192);
+            }
+        }
+    }
+    &_link{
+        position: absolute;
+        top: 30px;
+        right: 30px;
+        font-size: 18px;
+        cursor: pointer;
+        transition: all .3s ease;
+        text-align: right;
+        color: black;
+        padding: 6px 18px;
+        border-radius: 3px;
+        &:hover{
+            background: rgba(0, 0, 0, 0.048);
+            box-shadow: 4px 7px 12px -3px rgba(0, 0, 0, 0.219);
+        }
+    }
+    &_body{
+        z-index: 99;
+        width: calc(100% - 220px);
+        margin-left: 200px;
+        margin-top: 100px;
+        margin-bottom: 34px;
+        box-shadow: 4px 7px 12px -3px rgba(0, 0, 0, 0.349);
+        border: 1px solid rgba(0, 0, 0, 0.048);
+        background: rgb(236, 236, 236);
+        border-radius: 3px;
+        overflow-y: scroll;
+        height: 80vh;
+        position: relative;
+    }
+}
