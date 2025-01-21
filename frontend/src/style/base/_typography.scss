@@ -28,3 +28,13 @@ $color-dark-color-text: #3E424B;
 $color-light-bg: #F5F5F5;
 $color-gold: #BB8C5F;
 $color-white-card: #F4F4F4;
+
+
+@mixin link-font{
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 22.5px;
+    text-align: left;
+    text-decoration-skip-ink: none;
+    color: $color-light-color-text;
+}

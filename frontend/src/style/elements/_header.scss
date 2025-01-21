@@ -1,4 +1,261 @@
 .header{
     background: $color-background;
     color: $color-light-color-text;
+    width: 100%;
+    display: flex;
+    position: fixed;
+    flex-direction: column;
+    top: 0;
+    left: 0;
+    &_block{
+        &_top{
+            display: flex;
+            width: 100%;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid $color-gold;
+            padding-top: 14px;
+            padding-bottom: 14px;
+            &_left{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                width: 30%;
+                &_one{
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    align-items: baseline;
+                    & >a{
+                        @include link-font;
+                        display: flex;
+                        align-items: center;
+                        & > svg{
+                            font-size: 18px;
+                        }
+                        & > span{
+                            margin-left: 10px;
+                        }
+                        transition: all .3s ease;
+                        &:hover{
+                            color: $color-gold;
+                            }
+                        }
+                }
+            }
+            &_center{
+                width: 40%;
+                display: flex;
+                justify-content: center;
+                & > a{
+                    width: 233px;
+                    height: 78px;
+                    display: block;
+                    & > img{
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        filter: contrast(150%);
+                    }
+                }
+            }
+            &_right{
+                width: 30%;
+                display: flex;
+                flex-direction: row-reverse;
+            }
+        }
+        &_social{
+            font-size: 12px;
+            font-weight: 400;
+            line-height: 18px;
+            text-align: left;
+            text-underline-position: from-font;
+            text-decoration-skip-ink: none;
+            padding-top: 5px;
+            width: 100%;
+            padding-bottom: 6px;
+            & > a{
+                color: #D0D0D0;
+                transition: all .3s ease;
+                margin-left: 5px;
+                margin-right: 5px;
+                &:hover{
+                   color: $color-gold;
+                }
+            }
+            &_btn{
+                background: transparent;
+                width: 100%;
+                height: 35px;
+                @include link-font;
+                text-align: center;
+                border: 1px solid $color-light-color-text;
+                transition: all .3s ease;
+                &:hover{
+                    color: $color-gold;
+                    border: 1px solid $color-gold;
+                }
+            }
+        }
+        &_bottom{
+            padding-top: 22px;
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+        }
+    }
+}
+
+.header_tablet{
+    display: none;
+}
+
+.toggle{
+    width: 24px;
+    height: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    margin-left: 10px;
+    &_line{
+        width: 100%;
+        height: 3px;
+        background: $color-gold;
+    }
+}
+
+.header_nav_mobil{
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 80px);
+    background: $color-background;
+}
+
+.header_links{
+    border-top: 1px solid $color-gold;
+    padding-top: 40px;
+    padding-bottom: 60px;
+    padding-left: 20px;
+}
+
+.header_nav_links{
+    display: flex;
+    width: 40px;
+    height: 40px;
+    margin-top: 20px;
+    border: 1px solid $color-gold;
+    justify-content: center;
+    align-items: center;
+    font-size: 21px;
+    svg{
+        color: $color-gold;
+        font-weight: 600;
+    }
+}
+.header_reverse{
+    display: block;
+}
+
+@media (max-width: 1200px) {
+    .header_desktop{
+        display: none;
+    }
+    .header_tablet{
+        display: flex;
+    }
+    .header{
+        &_block{
+            &_top{
+                &_left{
+                    width: 50%;
+                    
+                }
+                &_center{
+                    width: 40%;
+                    display: flex;
+                    align-items: center;
+                    & > a{
+                        width: 133px;
+                        height: 38px;
+                    }
+                }
+                &_right{
+                    width: auto;
+                    margin-left: 15px;
+                    position: relative;
+                    align-items: center;
+                    flex-direction: row;
+                    cursor: pointer;
+                }
+            }
+            &_social{
+                
+                display: flex;
+                flex-direction: row;
+            }
+        }
+    }
+}
+@media (max-width: 768px) {
+    .header_reverse{
+        display: none;
+    }
+    .header_desktop{
+        display: none;
+    }
+    .header_tablet{
+        display: flex;
+        flex-direction: column;
+    }
+    .header{
+        &_block{
+            &_top{
+                &_left{
+                    width: 60%;
+                    flex-direction: column;
+                    align-items: center;
+                }
+                &_center{
+                        width: 100%;
+                        display: flex;
+                        margin-bottom: 12px;
+                        justify-content: space-evenly;
+                        align-items: center;
+                        flex-direction: row;
+                        & > a{
+                            width: 133px;
+                        }
+                }
+                &_right{
+                    width: auto;
+                    
+                    position: relative;
+                    align-items: center;
+                    flex-direction: row;
+                    cursor: pointer;
+                }
+                &_social{
+                    display: none;
+                }
+            }
+        }
+    }
+    .header_block_social_btn{
+        display: none;
+    }
+    .header_nav_mobil{
+        position: fixed;
+        top: 130px;
+        left: 0;
+        width: 100%;
+        height: calc(100% - 130px);
+    }
 }

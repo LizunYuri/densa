@@ -52,3 +52,26 @@ async def get_lasted_seo():
         'keywords' : seo_record[3],
         'created_at' : seo_record[4]
         }
+
+@app.get('/api/company')
+async def get_company_info():
+
+
+    company_info = await db.get_lasted_company_record()
+
+    if not company_info:
+        return HTTPException(status_code=404, detail="Error receiving company info")
+    
+    return{
+            'id' : company_info[0],
+            'name' : company_info[1],
+            'phone1' : company_info[2],
+            'phone2' : company_info[3],
+            'email' : company_info[4],
+            'address' : company_info[5],
+            'tin' : company_info[6],
+            'legal_name' : company_info[7],
+            'whatsap' : company_info[9],
+            'telegram' : company_info[10],
+            'vk' : company_info[11]
+        }

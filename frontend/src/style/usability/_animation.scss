@@ -1,0 +1,64 @@
+// Анимирование бургер меню
+
+.animated_toggle{
+    overflow: hidden;
+    position: relative;
+    &_line{
+        position: absolute;
+        &_top{
+            top: 0;
+        }
+        &:nth-child(2){
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        &:nth-child(3){
+            bottom: 0;
+        }
+    }
+}
+
+.tranition{
+    transition: all .5s ease;
+}
+
+.is-visible-left{
+    animation: toggle-left .5s linear;
+    left: 100%;
+}
+
+.is-visible-top{
+    animation: toggle-top 1s linear;
+    top: 50%;
+    transform: translateY(-50%); 
+    transform: rotate(45deg); 
+}
+
+@keyframes toggle-top{
+    0%{
+        top: 0;
+        opacity: 0;
+    }
+    10%{
+        opacity: 0;
+    }
+    50%{
+        top: 50%;
+        opacity: 0;
+        transform: translateY(-50%) rotate(0);
+    }
+    100%{
+        top: 50%;
+        opacity: 1;
+        transform: translateY(-50%) rotate(45deg); 
+    }
+}
+
+@keyframes toggle-left {
+    0%{
+        left: 0;
+    }
+    100%{
+        left: 100%;
+    }
+}

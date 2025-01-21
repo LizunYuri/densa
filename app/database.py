@@ -66,6 +66,10 @@ class Database:
     async def get_latest_seo_record(self):
         query = "SELECT * FROM seo ORDER BY created_at DESC LIMIT 1"
         return await self.fetch_one(query)
+    
+    async def get_lasted_company_record(self):
+        query = "SELECT * FROM company ORDER BY created_at DESC LIMIT 1"
+        return await self.fetch_one(query)
         
     async def get_latest_direct_record(self):
         query = "SELECT * FROM meta ORDER BY created_at DESC LIMIT 1"

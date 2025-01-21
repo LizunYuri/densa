@@ -13,4 +13,13 @@ button{
 
 a{
     text-decoration: none;
+    color: $color-light-color-text;
+}
+p{
+    padding: 0;
+    margin: 0;
+}
+
+ol, ul, li{
+    list-style: none;
 }

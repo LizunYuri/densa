@@ -1,0 +1,91 @@
+.nav{
+    width: 50%;
+    display: block;
+    &_decktop{
+        display: flex;
+        width: 100%;
+        justify-content: space-evenly;
+        & > li > a{
+            cursor: pointer;
+            transition: all .3s ease;
+            position: relative;
+            overflow: hidden;
+            @include link-font;
+            &::after{
+                content: '';
+                position: absolute;
+                overflow: hidden;
+                bottom: -100%;
+                left: 50%;
+                transform: translateX(-50%) translateY(-100%);
+                opacity: 0;
+                width: 1px;
+                background: $color-gold;
+                transition: all 1s ease;
+                }
+                &::before{
+                    position: absolute;
+                    bottom: -5px;
+                    left: -10%;
+                    content: '';
+                    width: 0;
+                    height: 1px;
+                    background: $color-gold;
+                    transition: all 1s ease;
+                }
+                &:hover{
+                    width: 120%;
+                    &::after{
+                        animation: vertical-line 1s linear;
+                        height: 15px;
+                        transform: translateY(0%);
+                        opacity: 1;
+                    }
+                    &::before{
+                        width: 120%;
+                    }
+                }
+            
+            &:hover{
+                color: $color-gold;
+            }
+        }
+    }
+}
+
+@keyframes vertical-line {
+    0%{
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    50%{
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    100%{
+        height: 15px;
+        transform: translateY(0%);
+        opacity: 1;
+    }
+}
+
+@media (max-width: 1200px) {
+    .nav{
+        
+        &_decktop{
+            flex-direction: column;
+            justify-content: space-evenly;
+            & > li{
+                margin-bottom: 20px;
+                & > a{
+                    font-size: 20px;
+                    font-weight: 400;
+                    line-height: 30px;
+                    text-align: left;
+                    text-underline-position: from-font;
+                    text-decoration-skip-ink: none;
+                }
+            }
+        }
+    }
+}
