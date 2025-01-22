@@ -2,11 +2,13 @@
     background: $color-background;
     color: $color-light-color-text;
     width: 100%;
+    height: 160px;
     display: flex;
     position: fixed;
     flex-direction: column;
     top: 0;
     left: 0;
+    z-index: 99;
     &_block{
         &_top{
             display: flex;
@@ -127,17 +129,6 @@
     }
 }
 
-.header_nav_mobil{
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    top: 80px;
-    left: 0;
-    width: 100%;
-    height: calc(100% - 80px);
-    background: $color-background;
-}
 
 .header_links{
     border-top: 1px solid $color-gold;
@@ -194,6 +185,7 @@
                     align-items: center;
                     flex-direction: row;
                     cursor: pointer;
+                    overflow: hidden;
                 }
             }
             &_social{
@@ -254,7 +246,6 @@
     .header_nav_mobil{
         position: fixed;
         top: 130px;
-        left: 0;
         width: 100%;
         height: calc(100% - 130px);
     }

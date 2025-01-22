@@ -10,6 +10,8 @@ const Header = () => {
   const [isOpenBurgerMenu, setIsOpenBurgerMenu] = useState(false)
   const [centerLineVisible, setCenterLineVisible]  = useState(false)
   const [topLiveVisible, setTopLineVisible]  = useState(false)
+  const [isVisibleTabletMenu, setIsVisibleTabletMenu] = useState(false)
+  const [isVisibleItems, setIsVisibleItems] = useState(false)
 
   const toggleBurgerMenu = () => {
     setIsOpenBurgerMenu((prev) => !prev)
@@ -17,7 +19,18 @@ const Header = () => {
 
     setTimeout(() => {
       setTopLineVisible((prev) => !prev)
+      setIsVisibleTabletMenu((prev) => !prev)
     }, 500)
+
+    if(setIsVisibleTabletMenu){
+      setTimeout(() => {
+        setIsVisibleItems(true)
+      }, 300)
+    } else{
+      setTimeout(() => {
+        setIsVisibleItems(false)
+      }, 100)
+    }
   }
 
   const companyData = (data) => ({
@@ -58,7 +71,7 @@ const Header = () => {
               <div className="header_block_top_left_one">
                 <a href={"tel:" + company.phone1}><FiPhone /> <span>{company.phone1}</span></a>
                 <div className='header_block_social'>
-                  {company.whatsap ? <a href={company.whatsap}>WhatsApp</a> : <p></p>}
+                  {company.whatsap ? <a href={company.whatsap}>whatsApp</a> : <p></p>}
                   {company.vk ? <a href={company.vk}>vk</a> : <p></p>}
                   {company.telegram ? <a href={company.telegram}>telegram</a> : <p></p>}  
                 </div>
@@ -97,40 +110,48 @@ const Header = () => {
               </a>
               
               <div className="header_block_top_right">
-                {isOpenBurgerMenu ? <p className="transition">Закрыть</p> : <p className="transition">Меню</p> }
+                <p className="transition">Меню</p>
                 <div onClick={toggleBurgerMenu}  className="toggle animated_toggle">
                   <div className={`toggle_line
                                 animated_toggle_line
                                 animated_toggle_line_top
                                 transition
-                                ${topLiveVisible ? 'is-visible-top' : ''}
+                                ${topLiveVisible ? 'is-visible-top' : 'not-visible-top'}
                                 `}></div>
                   <div 
                     className={`toggle_line
                                 animated_toggle_line
                                 transition
-                                ${centerLineVisible ? 'is-visible-left' : ''}
+                                ${centerLineVisible ? 'is-visible-left' : 'not-visible-left'}
                                 `}></div>
-                  <div className="toggle_line animated_toggle_line transition"></div>
+                  <div className={`
+                                  toggle_line 
+                                  animated_toggle_line 
+                                  animated_toggle_line_bottom
+                                  transition
+                                  ${topLiveVisible ? 'is-visible-button' : 'not-visible-bottom'}`}></div>
                 </div>
-                {isOpenBurgerMenu ? <div className="header_nav_mobil">
-                  <DesctopNav />
-                  <div className="header_links">
-                    <a href={"mailto:" + company.email}><FiMail /> <span>{company.email}</span></a>
-                    <div className='header_block_social'>
-                      {company.whatsap ? <a className='header_nav_links'  href={company.whatsap}><FaWhatsapp /></a> : <p></p>}
-                      {company.vk ? <a className='header_nav_links'  href={company.vk}><FaVk /></a> : <p></p>}
-                      {company.telegram ? <a className='header_nav_links' href={company.telegram}><FaTelegramPlane /></a> : <p></p>}  
+
+                <div className={`header_nav_mobil ${isVisibleTabletMenu ? 'is_header-visible' : ''}`}>
+                  {isVisibleItems ?  <DesctopNav /> : <div></div>}
+                  {isVisibleItems ?  
+                    <div className="header_links">
+                      <a href={"mailto:" + company.email}><FiMail /> <span>{company.email}</span></a>
+                      <div className='header_block_social'>
+                        {company.whatsap ? <a className='header_nav_links'  href={company.whatsap}><FaWhatsapp /></a> : <p></p>}
+                        {company.vk ? <a className='header_nav_links'  href={company.vk}><FaVk /></a> : <p></p>}
+                        {company.telegram ? <a className='header_nav_links' href={company.telegram}><FaTelegramPlane /></a> : <p></p>}  
+                      </div>
                     </div>
-                  </div>
-                </div> : <div></div>}
+                   : <div></div>}
+                </div>
               </div>
             </div>
             <div className="header_block_top_left">
               <div className="header_block_top_left_one">
                 <a href={"tel:" + company.phone1}><FiPhone /> <span>{company.phone1}</span></a>
                 <div className='header_block_social header_reverse'>
-                  {company.whatsap ? <a href={company.whatsap}>WhatsApp</a> : <p></p>}
+                  {company.whatsap ? <a href={company.whatsap}>whatsApp</a> : <p></p>}
                   {company.vk ? <a href={company.vk}>vk</a> : <p></p>}
                   {company.telegram ? <a href={company.telegram}>telegram</a> : <p></p>}  
                 </div>

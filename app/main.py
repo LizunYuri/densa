@@ -1,13 +1,16 @@
-from fastapi import FastAPI, Request, Depends, HTTPException
+from fastapi import FastAPI, Request, UploadFile, Depends, HTTPException
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from sqlalchemy.ext.asyncio import AsyncSession
 from .database import Database
 from app.auth import router as auth_router
-# from app.auth import 
+from app.routeImage import router as image_router
 
 app = FastAPI()
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+
 
 templates = Jinja2Templates(directory='templates')
 
@@ -27,7 +30,7 @@ async def shutdown():
     await db.close()
 
 app.include_router(auth_router, prefix="/auth", tags=['Authentification'])
-
+app.include_router(image_router, prefix="/img", tags=['Images'])
 
 @app.get('/', response_class=HTMLResponse)
 def read_root(request: Request):

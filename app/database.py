@@ -62,6 +62,12 @@ class Database:
             async with connection.cursor() as cursor:
                 await cursor.execute(query, params)
                 return await cursor.fetchone()
+            
+    async def fetch_all(self, query: str, *params: Any) -> list:
+        async with self.pool.acquire() as connection:
+            async with connection.cursor(aiomysql.DictCursor) as cursor:
+                await cursor.execute(query, params)
+                return await cursor.fetchall()
 
     async def get_latest_seo_record(self):
         query = "SELECT * FROM seo ORDER BY created_at DESC LIMIT 1"
@@ -74,6 +80,25 @@ class Database:
     async def get_latest_direct_record(self):
         query = "SELECT * FROM meta ORDER BY created_at DESC LIMIT 1"
         return await self.fetch_one(query)
+
+    async def insert_image_first_screen(self,
+                                        title: str,
+                                        subtitle : str,
+                                        content: str,
+                                        url: str
+                                        ) -> int:
+        query = f"INSERT INTO firstscreen (title, subtitle, content, url) VALUES (%s, %s, %s, %s)"
+
+        async with self.pool.acquire() as connection:
+            async with connection.cursor() as cursor:
+                await cursor.execute(query, (title, subtitle, content, url))
+                await connection.commit()
+                return cursor.rowcount
+            
+    async def get_first_screen_images(self) -> list:
+        query = "SELECT id, title, subtitle, content, url FROM firstscreen"
+
+        return await self.fetch_all(query)
 
     async def close(self):
         self.pool.close()

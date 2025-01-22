@@ -1,0 +1,16 @@
+.about{
+    padding-top: 120px;
+    background: color-light-bg;
+    &_parhtners{
+        & > h2{
+            font-family: 'moderustic';
+            font-size: 60px;
+            font-weight: 400;
+            line-height: 60px;
+            text-align: left;
+            text-underline-position: from-font;
+            text-decoration-skip-ink: none;
+            padding-bottom: 30px;
+        }
+    }
+}
