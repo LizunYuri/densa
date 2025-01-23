@@ -6,6 +6,8 @@ from .config import MYSQL_DATABASE, MYSQL_HOST, MYSQL_PASSWORD, MYSQL_PORT, MYSQ
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
+ALLOWED_TABLES = {"firstscreen", }
+
 class Database:
     def __init__(self,
                  host=MYSQL_HOST,
@@ -99,6 +101,63 @@ class Database:
         query = "SELECT id, title, subtitle, content, url FROM firstscreen"
 
         return await self.fetch_all(query)
+    
+    async def get_record_id(self, table: str, record_id: int) -> Optional[dict]:
+        try:
+            
+            if table not in ALLOWED_TABLES:
+                raise ValueError(f"Invalid table name: {table}")
+
+            query = f"SELECT * FROM {table} WHERE id = %s"
+            
+            async with self.pool.acquire() as conn:
+                async with conn.cursor(aiomysql.DictCursor) as cursor:
+                    await cursor.execute(query, (record_id,))
+                    result = await cursor.fetchone()
+            
+            return result 
+        except Exception as e:
+            raise ValueError(f"Database error: {str(e)}")
+
+    async def delete_record(self, table: str, record_id: int) -> bool:
+        try:
+            if table not in ALLOWED_TABLES:
+                raise ValueError(f"Invalid table name: {table}")
+
+            query = f"DELETE FROM {table} WHERE id = %s"
+            
+            async with self.pool.acquire() as conn:
+                async with conn.cursor() as cursor:
+                    await cursor.execute(query, (record_id,))
+                    result = cursor.rowcount
+            
+            return result > 0 
+        except Exception as e:
+            raise ValueError(f"Database error: {str(e)}")
+
+    async def update_record(self,
+                            table : str,
+                            record_id : int,
+                            update_data: dict
+                            ) -> bool:
+        try:
+
+            if table not in ALLOWED_TABLES:
+                raise ValueError(f"Invalid table name: {table}")
+        
+            set_clause = ', '.join([f"{key} = %s" for key in update_data.keys])
+            query = f"UPDATE {table} SET {set_clause} WHERE id = %s"
+
+            params = tuple(update_data.values()) + (record_id,)
+
+            async with self.pool.acquire() as connection:
+                async with connection.cursor() as cursor:
+                    await cursor.execute(query, params)
+                    result = cursor.rowcount
+            
+            return result > 0
+        except Exception as e:
+            raise ValueError(f"Database error: {str(e)}")
 
     async def close(self):
         self.pool.close()

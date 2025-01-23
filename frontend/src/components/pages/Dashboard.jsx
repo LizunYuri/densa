@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import CheckAuthStatus from '../api/CheckAuthStatus';
 import { Link, useNavigate } from 'react-router-dom';
 import GetRecord from '../api/GetRecord';
+import { FaWindowClose } from "react-icons/fa";
+
 
 
 const Dashboard = () => {
@@ -9,8 +11,11 @@ const Dashboard = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [logoutError, setLogoutError] = useState('')
   const navigate = useNavigate()
-  const [companyVisible, setCompanyVisible] = useState(false)
+  const [recordsFirstscreen, setRecordsFirstscreen] = useState(false)
   
+  const recordFirstScreenVisible = () => {
+    setRecordsFirstscreen((prev) => !prev)
+  }
 
   const handleAuthStatusChange = (status) => {
     setIsAuthenticated(status)
@@ -41,10 +46,11 @@ const Dashboard = () => {
       }
   }
 
-  const clickCompanyVisibleBtn = () => {
-    setCompanyVisible(true)
+  const clickClosedModalBtn = () => {
+    setRecordsFirstscreen(false)
     
   }
+
 
 
   return (
@@ -56,17 +62,22 @@ const Dashboard = () => {
           <div className='dashboard_panel'>
             <div className='dashboard_nav'>
               <h2>Управление записями</h2>
-              <button className='dashboard_nav_btn'>Приемущества</button>
-              <button onClick={clickCompanyVisibleBtn} className='dashboard_nav_btn'>Компания</button>
+              <button onClick={recordFirstScreenVisible} className={`dashboard_nav_btn ${recordsFirstscreen ? 'dashboard_visible_btn_active' : ''}`}>Первый экран</button>
+              <button className='dashboard_nav_btn'>Компания</button>
             </div>
             <button className='dashboard_btn' onClick={clickLogoutButton}>Выйти</button>
           </div>
-          {/* <div className='dashboard_body'></div> */}
+          <div className={`dashboard_body ${recordsFirstscreen ? 'dashboard_visible' : ''}`}>
+            <FaWindowClose onClick={clickClosedModalBtn} className='closed_btn_modal' />
+            <GetRecord />
+          </div>
         </div>
        : 
         <div className='login_container'>
           <h2 className='login_container_title'>Для продолжения работы необходимо авторизоваться</h2>
-          <Link to='/login'>К входу</Link>
+          <div className='login_container_form_container'>
+            <Link className='login_btn' to='/login'>К входу</Link>
+          </div>
         </div>
       }
     </div>
