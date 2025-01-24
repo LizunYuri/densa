@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const EditFirstScreenRecord = ({ recordId }) => {
+const EditFirstScreenRecord = ({ recordId, onRecordUpdated }) => {
     const [title, setTitle] = useState('');
     const [subtitle, setSubtitle] = useState('');
     const [content, setContent] = useState('');
@@ -34,30 +34,37 @@ const EditFirstScreenRecord = ({ recordId }) => {
 
     const readData = async (e) => {
         e.preventDefault();
-
+    
         const formData = new FormData();
         formData.append('title', title);
         formData.append('subtitle', subtitle);
         formData.append('content', content);
-
+    
         if (newFile) {
             formData.append('file', newFile);
         } else {
             formData.append('file', currentFile);
         }
-
+    
+        // Проверка содержимого FormData
+        console.log('Отправляемые данные:');
+        for (let pair of formData.entries()) {
+            console.log(`${pair[0]}: ${pair[1]}`);
+        }
+    
         try {
             const response = await fetch(`/img/update/firstscreen/${recordId}/`, {
                 method: 'PUT',
                 body: formData,
             });
-
+    
             const result = await response.json();
-
+    
             if (response.ok) {
                 setMessage(`Запись успешно обновлена!`);
                 setError('');
-                setCurrentFile(result.file); // Если сервер возвращает обновлённый файл
+                setCurrentFile(result.file); 
+                if (onRecordUpdated) onRecordUpdated();
             } else {
                 const errorMessage =
                     typeof result.detail === 'string'
@@ -72,9 +79,10 @@ const EditFirstScreenRecord = ({ recordId }) => {
             setError('Ошибка соединения с сервером! Попробуйте позднее.');
         }
     };
+    
 
     return (
-        <div>
+        <div className="modal_form">
             <form className="modal_form_body" onSubmit={readData}>
                 {message && <p className="success">{message}</p>}
                 {error && <p className="error">{error}</p>}

@@ -145,7 +145,7 @@ class Database:
             if table not in ALLOWED_TABLES:
                 raise ValueError(f"Invalid table name: {table}")
         
-            set_clause = ', '.join([f"{key} = %s" for key in update_data.keys])
+            set_clause = ', '.join([f"{key} = %s" for key in update_data.keys()])
             query = f"UPDATE {table} SET {set_clause} WHERE id = %s"
 
             params = tuple(update_data.values()) + (record_id,)

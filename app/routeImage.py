@@ -4,6 +4,7 @@ from app.database import Database
 from app.readimage import save_image
 import os
 
+os.makedirs("static/images", exist_ok=True)
 
 router = APIRouter()
 
@@ -54,7 +55,6 @@ async def upload_image(
     except Exception as e:
         print(f"Общая ошибка: {str(e)}")
         raise HTTPException(status_code=500, detail="Внутренняя ошибка сервера")
-
 
 @router.get('/first-images/')
 async def get_first_screen_images(db: Database = Depends(get_database)):
@@ -111,44 +111,67 @@ async def get_image(table: str, record_id: int, db: Database = Depends(get_datab
 
 @router.put("/update/{table}/{record_id}/")
 async def update_record_data(
-                             record_id: str,
-                             update_data: dict,
-                             new_file: Optional[UploadFile] = None,
-                             db : Database = Depends(get_database)
-                             ):
-    table = 'firstscreen',
+    table: str,
+    record_id: str,
+    title: str = Form(...),
+    subtitle: str = Form(...),
+    content: str = Form(...),
+    file: Optional[UploadFile] = None,
+    db: Database = Depends(get_database)
+):
+    
     record = await db.get_record_id(table, record_id)
     if not record:
         raise HTTPException(status_code=404, detail="Record not found")
     
+    
     old_file_path = record.get('url')
 
-    if new_file:
+    print(old_file_path)
+
+   
+    update_data = {
+        "title": title,
+        "subtitle": subtitle,
+        "content": content,
+    }
+
+    print(f"Получен запрос на обновление записи {record_id} в таблице {table}")
+    print(f"title: {title}, subtitle: {subtitle}, content: {content}")
+    if file:
+        print(f"Файл получен: {file.filename}")
+    else:
+        print("Файл не получен")
+    
+
+    
+    if file:
         try:
+            
             if old_file_path and os.path.exists(old_file_path):
                 os.remove(old_file_path)
 
-
-            new_file_path = f"images/{new_file.filename}"  
+            
+            new_file_path = f"static/images/{file.filename}"  
             with open(new_file_path, "wb") as f:
-                f.write(await new_file.read())
+                f.write(await file.read())
 
+            
             update_data["url"] = new_file_path
 
         except Exception as e:
             raise HTTPException(
                 status_code=500, detail=f"Failed to process the file: {str(e)}"
-            )  
-
+            )
     else:
-        update_data['url'] = old_file_path 
+        
+        update_data["url"] = old_file_path
 
+    
     success = await db.update_record(table, record_id, update_data)
     if not success:
         raise HTTPException(
             status_code=500, detail="Failed to update the record in the database"
         )
     return {"message": "Record updated successfully"}
-
-        
 

@@ -74,7 +74,7 @@ const GetRecord = () => {
    
     const deleteFetch = async (id) => {
         try{
-            const response = await fetch (`/img/delete/firstscreen/${id}`,
+            const response = await fetch (`/img/delete/firstscreen/${id}/`,
                 {
                     method : 'DELETE',
                     headers : {
@@ -211,7 +211,7 @@ const GetRecord = () => {
                         <div className="upload_form_body">
                             <FaWindowClose onClick={notEditModal} className='closed_btn_modal' />
                             {editModalVisible && (
-                                <EditFirstScreenRecord recordId={editRecordInformation.id} />
+                                <EditFirstScreenRecord recordId={editRecordInformation.id} onRecordUpdated={fetchData} />
                             )}
                         </div>
                     </div>
