@@ -1,6 +1,5 @@
 .about{
     padding-top: 120px;
-    background: color-light-bg;
     &_parhtners{
         & > h2{
             font-family: 'moderustic';
@@ -11,6 +10,31 @@
             text-underline-position: from-font;
             text-decoration-skip-ink: none;
             padding-bottom: 30px;
+        }
+    }
+}
+
+.parhtners{
+    &_table{
+        
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        height: 204px;
+        background: green;
+        overflow: hidden;
+        margin-bottom: 100px;
+    }
+    &_body{
+        &_content{
+            margin-top: 20px;
+            margin-left: 20px;
+            margin-right: 20px;
+            margin-bottom: 0;
+            width: 211px;
+            height: 82px;
+            background: red;
         }
     }
 }

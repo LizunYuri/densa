@@ -81,16 +81,19 @@ const MainSection = () => {
   return (
     <section className='main' onTouchStart={handleTouchSmart} onTouchMove={handleTouchMove}>
       {images.length > 0 ? 
-        (<div className='container main_slider'>
+        (<>
+          <div className='img_fixed '>
+            <img className={`transition img_fixed ${animationDirectionImage ? 'img_novisible' : 'img_visible' }`} src={images[currentIndex].url} alt={images[currentIndex].title} />
+          </div>
+
+        <div className='container main_slider'>
           <div className="image_after main_slider_image">
-            <img className={`transition ${animationDirectionImage ? 'img_novisible' : 'img_visible' }`} src={images[currentIndex].url} alt={images[currentIndex].title} />
             <div className="main_content">
               <div className="main_slider_content">
                 <h2 className={`main_slider_content_title transition ${animationDirectionImage ? 'img_novisible' : 'img_visible' }`}>{images[currentIndex].title}</h2>
                 <h3 className={`main_slider_content_subtitle transition ${animationDirectionImage ? 'img_novisible' : 'img_visible' }`}>{images[currentIndex].subtitle}</h3>
                 <p className={`main_slider_content_content transition ${animationDirectionImage ? 'img_novisible' : 'img_visible' }`}>{images[currentIndex].content}</p>
-              </div>
-              <div className="main_slider_btn">
+                <div className="main_slider_btn">
                 <button onClick={previosSlide} className="prev-btn">
                     <div className="btn_top"></div>
                 </button>
@@ -98,9 +101,11 @@ const MainSection = () => {
                   <div className="btn_bottom"></div>
                 </button> 
               </div>
+              </div>
+
             </div>
           </div>
-        </div>) : (<div></div>)}
+        </div></>) : (<div></div>)}
     </section>
   );
 };

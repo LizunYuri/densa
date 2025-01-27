@@ -162,3 +162,8 @@ class Database:
     async def close(self):
         self.pool.close()
         await self.pool.wait_closed()
+
+    async def get_equipment_records(self):
+        query = "SELECT id, name, url from equipment"
+
+        return await self.fetch_all(query)
