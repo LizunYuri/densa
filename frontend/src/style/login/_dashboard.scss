@@ -70,6 +70,7 @@
             transition: all .3s ease;
             text-align: right;
             color: black;
+            position: relative;
             &:hover{
                 background: rgba(0, 0, 0, 0.192);
             }
@@ -310,40 +311,58 @@
 }
 
 
+
 .nav_list{
     text-align: right;
     width: 100%;
-    // overflow: hidden;
     display: none;
+    position: relative;
+    top: -100px;
+    transition: all .3s ease;
     &_content{
         width: 100%;
+        display: block;
         padding-top: 12px;
         padding-bottom: 12px;
         padding-right: 12px;
         box-shadow: 4px 7px 12px -3px rgb(165, 165, 165);
-        &> li{
-            margin-bottom: 12px;
-            padding-bottom: 8px;
-            cursor: pointer;
-            overflow: hidden;
-            position: relative;
-            &::after{
-                content: '';
-                position: absolute;
-                bottom: 0;
-                left: 100%;
-                width: 70%;
-                height: 1px;
-                background: black;
-                z-index: 99;
-                transition: all .3s ease;
-            }
-            &:hover{
-                &::after{
-                    left: 30%;
-                }
-            }
-
-        }
+        position: relative;
+        overflow: hidden;
+        transition: all .3s ease;
     }
+    &_item{
+        margin-bottom: 12px;
+        padding-bottom: 8px;
+        cursor: pointer;
+        overflow: hidden;
+        position: relative;
+        position: relative;
+        left: -100%;
+        opacity: 0;
+        transition: all .3s ease;
+        &::after{
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 100%;
+            width: 70%;
+            height: 1px;
+            background: black;
+            z-index: 99;
+            transition: all .3s ease;
+        }
+        &:hover{
+            &::after{
+                left: 30%;
+            }
+        }
+
+    }
+}
+
+.nav_list_visible{
+    display: block;
+    height: auto;
+    top: 0;
+    margin-bottom: 16px;
 }
