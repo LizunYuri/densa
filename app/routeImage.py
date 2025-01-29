@@ -116,7 +116,7 @@ async def update_record_data(
     title: str = Form(...),
     subtitle: str = Form(...),
     content: str = Form(...),
-    file: Optional[UploadFile] = None,
+    file: UploadFile = Form(...),
     db: Database = Depends(get_database)
 ):
     

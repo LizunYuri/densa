@@ -4,6 +4,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import GetRecord from '../api/GetRecord';
 import { FaWindowClose } from "react-icons/fa";
 import AboutsUploadWindow from '../api/AboutsUploadWindow';
+import EquipmentUpload from '../api/EquipmentUpload';
+import MaterialsList from '../api/MaterialsList';
 
 
 
@@ -12,10 +14,16 @@ const Dashboard = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [logoutError, setLogoutError] = useState('')
   const navigate = useNavigate()
+  // отвечает за показ блока первого экрана (работает)
   const [recordsFirstscreen, setRecordsFirstscreen] = useState(false)
   const [recordAbout, setRecordAbout] = useState(false)
   const [aboutListVisible, setAboutListVisible] = useState(false)
-  const [aboutListItemVisible, setAboutItemVisible] = useState(false)
+  //  отвечает за показ блока о нас
+  const [aboutListItemVisible, setAboutListItemVisible] = useState(false)
+  //  отвечает за показ блока поставщики
+  const [equipmentListItemsVisible, setEquipmentListItemsVisible] = useState(false)
+//  Отвечает за отображение блока материалы
+  const [materialsListVisible, setMaterialsListVisible] = useState(false)
   const containerRef = useRef(null)
 
 
@@ -39,6 +47,7 @@ const Dashboard = () => {
       }
   };
 
+
   const removeStylesWithDelay = () => {
     if (containerRef.current) {
       const children = containerRef.current.children; 
@@ -55,11 +64,15 @@ const Dashboard = () => {
 
       removeStyle();
     }
-};
+  };
 
+  // блок о нас появление и исчезновение
   const recordFirstScreenVisible = () => {
     setRecordsFirstscreen((prev) => !prev)
     setRecordAbout(false)
+    setAboutListItemVisible(false)
+    setEquipmentListItemsVisible(false)
+    setMaterialsListVisible(false)
     removeStylesWithDelay()
     setTimeout(() =>{
       setAboutListVisible(false)
@@ -99,15 +112,20 @@ const Dashboard = () => {
 
   const clickClosedModalBtn = () => {
     setRecordsFirstscreen(false)
-    setAboutItemVisible(false)
+    setAboutListItemVisible(false)
+    setEquipmentListItemsVisible(false)
+    setMaterialsListVisible(false)
     
   }
 
+
+// Раскрытие списка в блоке о нас
   const clickToVisibleSubMenuAbout = () => {
 
     if(!recordAbout){
       setRecordAbout(true)
       setRecordsFirstscreen(false)
+      setMaterialsListVisible(false)
       setTimeout(() =>{
         setAboutListVisible(true)
       }, 200)
@@ -116,21 +134,54 @@ const Dashboard = () => {
       }, 500)
     } else{
       removeStylesWithDelay()
+      setRecordsFirstscreen(false)
+      setEquipmentListItemsVisible(false)
       setTimeout(() =>{
         setAboutListVisible(false)
+        setEquipmentListItemsVisible(false)
         setRecordAbout(false)
       }, 800)
       
     }
     
-    
-
-
   }
 
+  // показ и скрытие блока с преимуществами
   const aboutListVisibleFunction = () => {
-    setAboutItemVisible((prev) => !prev)
+    setAboutListItemVisible(false)
+    if(!aboutListItemVisible){
+      setEquipmentListItemsVisible(false)
+      setRecordsFirstscreen(false)
+      setMaterialsListVisible(false)
+      setAboutListItemVisible(true)
+    }
   }
+
+  // показ блока с поставщиками и партнерами
+  const equipmentListItemsVisibleFunction = () => {
+
+    setEquipmentListItemsVisible(false)
+    if(!equipmentListItemsVisible){
+      setAboutListItemVisible(false)
+      setRecordsFirstscreen(false)
+      setMaterialsListVisible(false)
+      setEquipmentListItemsVisible(true)
+    }
+  }
+
+    // показ блока с материалами
+  const materialsListItemsVisibleFunction = () => {
+    
+      setMaterialsListVisible(false)
+
+      if(!materialsListVisible){
+        setAboutListItemVisible(false)
+        setRecordsFirstscreen(false)
+        setMaterialsListVisible(true)
+        setEquipmentListItemsVisible(false)
+      }
+    }
+  
 
 
   return (
@@ -146,11 +197,11 @@ const Dashboard = () => {
               <button onClick={clickToVisibleSubMenuAbout} className={`dashboard_nav_btn ${recordAbout ? 'dashboard_visible_btn_active' : ''}`}>Блок "О нас"</button>
                 <ul className={`list nav_list ${aboutListVisible ? 'nav_list_visible' : ''}`}>
                   <div ref={containerRef} className="nav_list_content">
-                    <li className="nav_list_item">Партнеры</li>
+                    <li onClick={equipmentListItemsVisibleFunction} className="nav_list_item">Партнеры</li>
                     <li onClick={aboutListVisibleFunction} className="nav_list_item">Преимущества</li>
                   </div>
                 </ul>
-                
+              <button onClick={materialsListItemsVisibleFunction} className={`dashboard_nav_btn ${materialsListVisible ? 'dashboard_visible_btn_active' : ''}`}>Блок "Материалы"</button>
               <button className='dashboard_nav_btn'>Компания</button>
             </div>
             <button className='dashboard_btn' onClick={clickLogoutButton}>Выйти</button>
@@ -162,6 +213,14 @@ const Dashboard = () => {
           <div className={`dashboard_body ${aboutListItemVisible ? 'dashboard_visible' : ''}`}>
             <FaWindowClose onClick={clickClosedModalBtn} className='closed_btn_modal' />
             <AboutsUploadWindow />
+          </div>
+          <div className={`dashboard_body ${equipmentListItemsVisible ? 'dashboard_visible' : ''}`}>
+            <FaWindowClose onClick={clickClosedModalBtn} className='closed_btn_modal' />
+            <EquipmentUpload />
+          </div>
+          <div className={`dashboard_body ${materialsListVisible ? 'dashboard_visible' : ''}`}>
+            <FaWindowClose onClick={clickClosedModalBtn} className='closed_btn_modal' />
+            <MaterialsList />
           </div>
         </div>
        {/* : 

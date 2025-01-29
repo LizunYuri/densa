@@ -5,8 +5,8 @@ const DesctopNav = () => {
     <nav className='nav'>
         <ul className='nav_decktop'>
         <li><a href="#about">О нас</a></li>
+        <li><a href="#materials">Материалы</a></li>
         <li><a href="#">Бассейны</a></li>
-        <li><a href="#">Материалы</a></li>
         <li><a href="#">Контакты</a></li>
         </ul>
     </nav>

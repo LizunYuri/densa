@@ -1,7 +1,7 @@
 from fastapi import APIRouter,  FastAPI, UploadFile, Form, HTTPException, Depends
 from typing import Optional
 from app.database import Database
-from app.readimage import save_image, save_equipment
+from app.readimage import save_equipment
 import os
 
 os.makedirs("static/equipment", exist_ok=True)
@@ -17,7 +17,7 @@ async def get_database() -> Database: # type: ignore
     finally:
         await db.close()
 
-@router.post('/upload-equipment/')
+@router.post('/equipment-upload/')
 async def upload_equipment(
         name: str = Form(...),
         file: UploadFile = Form(...),
@@ -66,7 +66,7 @@ async def get_equipment(db: Database = Depends(get_database)):
         raise HTTPException(status_code=500, detail=str(e))
 
     
-@router.delete("/delete/{table}/{record_id}/")
+@router.delete("/equipment-delete/{table}/{record_id}/")
 async def delete_equipment(table: str, record_id: int, db: Database = Depends(get_database)):
     
     record = await db.get_record_id(table, record_id)
@@ -95,12 +95,12 @@ async def delete_equipment(table: str, record_id: int, db: Database = Depends(ge
     return {"message": f"Запись удалена!"}
 
 
-@router.put("/update/{table}/{record_id}/")
+@router.put("/equipment-update/{table}/{record_id}/")
 async def update_record_data(
     table: str,
     record_id: str,
     name: str = Form(...),
-    file: Optional[UploadFile] = None,
+    file: UploadFile = None,
     db: Database = Depends(get_database)
 ):
     
@@ -158,6 +158,17 @@ async def update_record_data(
         )
     return {"message": "Record updated successfully"}
 
+@router.get('/equipment/{table}/{record_id}/')
+async def get_image(table: str, record_id: int, db: Database = Depends(get_database)):
+    
+    try:
+        record = await db.get_record_id(table, record_id)
+
+        if not record:
+            raise HTTPException(status_code=404, detail="No record found")
+        return {'record' : record}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 @router.get('/about/')
 async def get_equipment(db: Database = Depends(get_database)):
@@ -244,7 +255,7 @@ async def update_record_data(
     record_id: str,
     title: str = Form(...),
     content: str = Form(...),
-    file: Optional[UploadFile] = None,
+    file: UploadFile = None,
     db: Database = Depends(get_database)
 ):
     
@@ -303,3 +314,15 @@ async def update_record_data(
         )
     return {"message": "Record updated successfully"}
 
+
+@router.get('/about/{table}/{record_id}/')
+async def get_image(table: str, record_id: int, db: Database = Depends(get_database)):
+    
+    try:
+        record = await db.get_record_id(table, record_id)
+
+        if not record:
+            raise HTTPException(status_code=404, detail="No record found")
+        return {'record' : record}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))

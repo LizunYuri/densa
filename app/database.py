@@ -6,7 +6,7 @@ from .config import MYSQL_DATABASE, MYSQL_HOST, MYSQL_PASSWORD, MYSQL_PORT, MYSQ
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
-ALLOWED_TABLES = {"firstscreen", "equipment"}
+ALLOWED_TABLES = {"firstscreen", "equipment", 'about'}
 
 class Database:
     def __init__(self,
@@ -196,4 +196,22 @@ class Database:
             async with connection.cursor() as cursor:
                 await cursor.execute(query, (title, content, url))
                 await connection.commit()
-                return cursor.rowcount   
+                return cursor.rowcount  
+
+    async def get_materials_records(self):
+        query = "SELECT id, title, content, url from materials"
+
+        return await self.fetch_all(query)
+    
+    async def insert_materials(self,
+                                title: str,
+                                content: str,
+                                url: str
+                                ) -> int:
+        query = f"INSERT INTO materials (title, content, url) VALUES (%s, %s, %s)"
+
+        async with self.pool.acquire() as connection:
+            async with connection.cursor() as cursor:
+                await cursor.execute(query, (title, content, url))
+                await connection.commit()
+                return cursor.rowcount  

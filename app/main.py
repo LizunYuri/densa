@@ -7,6 +7,7 @@ from .database import Database
 from app.auth import router as auth_router
 from app.routeImage import router as image_router
 from app.routeAbouts import router as about_router
+from app.routeMaterials import router as materials_router
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -33,6 +34,7 @@ async def shutdown():
 app.include_router(auth_router, prefix="/auth", tags=['Authentification'])
 app.include_router(image_router, prefix="/img", tags=['Images'])
 app.include_router(about_router, prefix='/about', tags=["Abouts"])
+app.include_router(materials_router, prefix='/materials', tags=["Materials"])
 
 @app.get('/', response_class=HTMLResponse)
 def read_root(request: Request):

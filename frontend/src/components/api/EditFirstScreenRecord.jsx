@@ -42,8 +42,6 @@ const EditFirstScreenRecord = ({ recordId, onRecordUpdated }) => {
     
         if (newFile) {
             formData.append('file', newFile);
-        } else {
-            formData.append('file', currentFile);
         }
     
         // Проверка содержимого FormData
