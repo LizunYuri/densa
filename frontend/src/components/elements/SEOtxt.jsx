@@ -86,7 +86,7 @@ const SEOtxt = () => {
                         </div>
                         <div className="container seo_content">
                             <div className="seo_body">
-                                <h3>{abouts[currentIndex].title}</h3>
+                                <h4>{abouts[currentIndex].title}</h4>
                                 <p>{abouts[currentIndex].content}</p>
                                 <div className="seo_btn">
                                     <button onClick={previosSlide} className="prev-btn">

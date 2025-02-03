@@ -8,7 +8,7 @@
     flex-direction: column;
     top: 0;
     left: 0;
-    z-index: 99;
+    z-index: 9900999;
     &_block{
         &_top{
             display: flex;
@@ -211,7 +211,7 @@
         &_block{
             &_top{
                 &_left{
-                    width: 60%;
+                    width: 100%;
                     flex-direction: column;
                     align-items: center;
                 }

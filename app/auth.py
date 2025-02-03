@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException, Depends, Response, Request
-from jose import JWSError, jwt
+from jose import JWSError, jwt, JWTError
 from passlib.context import CryptContext
 from pydantic import BaseModel
 from datetime import datetime, timedelta
@@ -86,3 +86,11 @@ async def protected_route(is_valid: bool = Depends(get_current_user)):
 async def logout(response: Response):
     response.delete_cookie(key='access_token')
     return {'message' : "Logged out successfully"}
+
+def verify_token(token: str):
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        return payload
+    except JWTError:
+        raise HTTPException(status_code=401, detail="Invalid token")
+    

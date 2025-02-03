@@ -97,7 +97,7 @@ const AboutUs = () => {
     <section className='about' name='about' id='about'>
       {equipments.length > 0 ? (
         <div className="container about_parhtners">
-          <h2>Проверенное оборудование</h2>
+          <h2 classsName='title-typography'>Проверенное оборудование</h2>
           <div className="parhtners_container">
             <div onClick={scrollToBackward} className="parhtners_arrow">
               <MdArrowLeft />

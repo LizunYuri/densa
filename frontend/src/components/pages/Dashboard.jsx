@@ -179,6 +179,8 @@ const Dashboard = () => {
         setRecordsFirstscreen(false)
         setMaterialsListVisible(true)
         setEquipmentListItemsVisible(false)
+        setRecordAbout(false)
+        setAboutListVisible(false)
       }
     }
   
@@ -201,7 +203,7 @@ const Dashboard = () => {
                     <li onClick={aboutListVisibleFunction} className="nav_list_item">Преимущества</li>
                   </div>
                 </ul>
-              <button onClick={materialsListItemsVisibleFunction} className={`dashboard_nav_btn ${materialsListVisible ? 'dashboard_visible_btn_active' : ''}`}>Блок "Материалы"</button>
+              <button onClick={materialsListItemsVisibleFunction} className={`dashboard_nav_btn ${materialsListVisible ? 'dashboard_visible_btn_active' : ''}`}>Блок "Услуги"</button>
               <button className='dashboard_nav_btn'>Компания</button>
             </div>
             <button className='dashboard_btn' onClick={clickLogoutButton}>Выйти</button>

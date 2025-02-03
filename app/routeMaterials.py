@@ -162,7 +162,7 @@ async def update_record_data(
     return {"message": "Record updated successfully"}
 
 
-@router.get('/materials/{table}/{record_id}/')
+@router.get('/{table}/{record_id}/')
 async def get_materials(table: str, record_id: int, db: Database = Depends(get_database)):
     
     try:

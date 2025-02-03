@@ -39,6 +39,35 @@ $color-white-card: #F4F4F4;
     color: $color-light-color-text;
 }
 
+.title-typography{
+    font-family: 'moderustic';
+    font-size: 60px;
+    font-weight: 400;
+    line-height: 60px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    padding-bottom: 30px;
+}
+
+
+@media (max-width: 1200px) {
+    .title-typography{
+                font-family: 'moderustic';
+                font-family: Forum;
+                font-size: 50px;
+                font-weight: 400;
+                line-height: 65px;
+    }
+}
+
+@media (max-width: 768px) {
+    .title-typography{
+                font-size: 25px;
+                line-height: 32.5px;
+    }
+}
+
 body{
     background: #EEEEEE;
 }
