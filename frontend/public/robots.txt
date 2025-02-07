@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+
+Disallow: /login/
+Disallow: /dashbord/
+
+
+Sitemap: https://денса.рф/sitemap.xml

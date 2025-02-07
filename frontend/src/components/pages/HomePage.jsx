@@ -4,6 +4,9 @@ import MainSection from '../elements/MainSection';
 import AboutUs from '../elements/AboutUs';
 import Materials from '../elements/Materials'
 import LidGen from '../elements/LigGen'
+import Gallery from '../elements/Gallery';
+import Contacts from '../elements/Contacts';
+import Footer from '../elements/Footer';
 
 const HomePage = () => {
   return (
@@ -14,7 +17,10 @@ const HomePage = () => {
         <AboutUs />
         <Materials />
         <LidGen />
+        <Gallery />
+        <Contacts />
       </main>
+      <Footer />
     </>
   );
 };

@@ -33,7 +33,7 @@
         text-align: center;
     }
     &_body{
-        width: calc((100% - 930px) + 1.5rem);
+        // width: calc((100% - 930px) + 1.5rem);
         
         position: relative;
         height: 100%;
@@ -56,7 +56,7 @@
             text-align: left;
             text-underline-position: from-font;
             text-decoration-skip-ink: none;
-            color: $color-dark-color-text;
+            color: $color-gold;
         }
     }
     &_btn{
@@ -125,6 +125,7 @@
             text-underline-position: from-font;
             text-decoration-skip-ink: none;
             transition: all .3s ease;
+            outline: 1px solid $color-gold;
             &::placeholder{
             color: #D0D0D0;
             }
@@ -178,6 +179,17 @@
     animation: error-state 500ms linear;
 }
 
+.sucess-message{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 100%;
+    &> h3{
+        text-align: center;
+    }
+}
+
 @media (max-width: 1200px) {
 
     .user_data{
@@ -194,7 +206,7 @@
         }
         &_body{
             width: 100%;
-            height: 300px;
+            height: 400px;
             position: relative;
         }
     }
@@ -235,7 +247,7 @@
         }
         &_body{
             width: 100%;
-            height: 300px;
+            height: 590px;
             position: relative;
             & > p{
                 font-size: 15px;

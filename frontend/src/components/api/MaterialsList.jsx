@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { FaWindowClose } from "react-icons/fa";
-import CheckAuthStatus from '../api/CheckAuthStatus';
 import MaterialsUpdate from './MaterialsUpdate';
 import MaterialsAddRecord from './MaterialsAddRecord';
 
 
 const MaterialsList = () => {
   const[getRecord, setGetRecord] = useState([])
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [deleteModalVisible, setDeleteModalVisible] = useState(false)
   const [deleteNameElement, setDeleteNameElement] = useState({ id: '', title: '' })
   const [deleteMessage, setDeleteMessage] = useState('')
@@ -15,11 +13,6 @@ const MaterialsList = () => {
   const [editRecordInformation, setEditRecordInformation] = useState({id : '',})
   const [editModalVisible, setEditModalVisible] = useState(false)
   const [addModalVisible, setAddModalVisible] = useState(false)
-
-
-  const handleAuthStatusChange = (status) => {
-    setIsAuthenticated(status)
-  }
 
   const fetchData = async () => {
     try {
@@ -111,13 +104,16 @@ const MaterialsList = () => {
 
   return (
     <div className='dashboard_modal'>
-      < CheckAuthStatus onAuthStatusChange={handleAuthStatusChange} />
-      {/* {isAuthenticated ? ( */}
-        <>
           <h2>Блок "Услуги"</h2>
           <p>Информация отображается в блоке Услуги. Загружаемое изображение должно быть высокого качества с разрешением не меньше 768х480. <br /><b>!Внимание! при отсутсвии записей данный блок не отображается на сайте</b></p>
           <div className="dashboard_table_add">
             <button onClick={visibleWindow} className="login_btn">Добавить запись</button>
+          </div>
+          <div className={`upload_form ${addModalVisible ? 'dashboard_visible' : 'dashboard_not_visible'}`}>
+            <div className="upload_form_body">
+              <FaWindowClose onClick={notVisibleWindow} className='closed_btn_modal' />
+              <MaterialsAddRecord />
+            </div>
           </div>
           <div className="dashboard_table">
             {getRecord.length > 0 ? (
@@ -198,19 +194,11 @@ const MaterialsList = () => {
                     )}
                   </div>
                 </div>
-                <div className={`upload_form ${addModalVisible ? 'dashboard_visible' : 'dashboard_not_visible'}`}>
-                  <div className="upload_form_body">
-                    <FaWindowClose onClick={notVisibleWindow} className='closed_btn_modal' />
-                    <MaterialsAddRecord />
-                  </div>
-                </div>
               </div>
             ) : (
               <span>no record</span>
             )}
           </div>
-        </>
-      {/* ) : (<></>)} */}
     </div>
   );
 };

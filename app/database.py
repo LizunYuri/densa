@@ -6,7 +6,7 @@ from .config import MYSQL_DATABASE, MYSQL_HOST, MYSQL_PASSWORD, MYSQL_PORT, MYSQ
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
-ALLOWED_TABLES = {"firstscreen", 'clients', "equipment", 'about', 'materials'}
+ALLOWED_TABLES = {"firstscreen", 'gallery', 'clients', "equipment", 'about', 'materials', 'company'}
 
 class Database:
     def __init__(self,
@@ -31,7 +31,7 @@ class Database:
             db=self.db,
             autocommit=True,
         )
-        print('Database connected')
+        print(f"Connecting to database at {self.host}:{self.port}")
 
     async def create_user(self, 
                           username: str,
@@ -47,11 +47,14 @@ class Database:
             print(f"user '{username}' created successfully. Admin^ {admin}")
 
     async def get_user_by_username(self, username: str) -> Optional[dict]:
+        if not self.pool:
+            raise RuntimeError("Database connection is not established. Call `connect()` first.")
         query = 'SELECT id, username, password FROM users WHERE username = %s'
         async with self.pool.acquire() as connection:
             async with connection.cursor(aiomysql.DictCursor) as cursor:
                 await cursor.execute(query, (username,))
                 return await cursor.fetchone()
+            
 
     async def execute(self, query: str, *params: Any) -> Any:
         async with self.pool.acquire() as connection:
@@ -229,8 +232,26 @@ class Database:
                 await connection.commit()
                 return cursor.rowcount  
             
-
     async def get_clients_records(self):
         query = "SELECT id, name, phone, created_at, is_ofer from clients"
 
         return await self.fetch_all(query)
+    
+    async def upload_gallery_record(self,
+                                        title: str,
+                                        url: str
+                                        ) -> int:
+        query = f"INSERT INTO gallery (title, url) VALUES ( %s, %s)"
+
+        async with self.pool.acquire() as connection:
+            async with connection.cursor() as cursor:
+                await cursor.execute(query, (title,  url))
+                await connection.commit()
+                return cursor.rowcount
+            
+    async def get_gallery_images(self) -> list:
+        query = "SELECT id, title, url FROM gallery"
+
+        return await self.fetch_all(query)
+   
+   

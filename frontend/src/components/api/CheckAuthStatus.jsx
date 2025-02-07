@@ -24,7 +24,6 @@ const CheckAuthStatus = ({onAuthStatusChange}) => {
               const result = await response.json()
               setIsAuth(result.isAuth)
               onAuthStatusChange(result.isAuth)
-              console.log(result.isAuth)
             } else {
               setIsAuth(false)
               onAuthStatusChange(false)
@@ -37,7 +36,6 @@ const CheckAuthStatus = ({onAuthStatusChange}) => {
         }
         checkAuthStatus()
       }, [])
-
 };
 
 export default CheckAuthStatus;

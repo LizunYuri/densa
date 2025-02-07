@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { FaWindowClose } from "react-icons/fa";
-import CheckAuthStatus from '../api/CheckAuthStatus';
 import EquipmentUpdateRecord from './EquipmentUpdateRecord';
 import EquipmentAddRecord from './EquipmentAddRecord';
 
 const EquipmentUpload = () => {
   const [getRecordAbout, setGetRecordAbout] = useState([])
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [deleteModalVisible, setDeleteModalVisible] = useState(false)
   const [deleteNameElement, setDeleteNameElement] = useState({ id: '', title: '' })
   const [deleteMessage, setDeleteMessage] = useState('')
@@ -14,12 +12,6 @@ const EquipmentUpload = () => {
   const [addModalVisible, setAddModalVisible] = useState(false)
   const [editRecordInformation, setEditRecordInformation] = useState({id : '',})
   const [editModalVisible, setEditModalVisible] = useState(false)
-
-
-
-  const handleAuthStatusChange = (status) => {
-    setIsAuthenticated(status)
-  }
 
 
   const closeDeleteModalWindow = () => {
@@ -112,8 +104,6 @@ const EquipmentUpload = () => {
   return (
 
     <div className='dashboard_modal'>
-    < CheckAuthStatus onAuthStatusChange={handleAuthStatusChange} />
-    {/* {isAuthenticated ? ( */}
       <>
         <h2>Раздел "Поставщики"</h2>
         <p>Информация блока о поставщиках. <br /><b>!Внимание! при отсутсвии записей данный блок не отображается на сайте</b></p>
@@ -206,8 +196,6 @@ const EquipmentUpload = () => {
           </div>
         </div>
       </>
-    {/* // ) : (<></>)} */}
-
     </div>
   );
 };

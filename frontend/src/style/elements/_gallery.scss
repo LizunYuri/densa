@@ -1,0 +1,227 @@
+.gallery{
+    margin-top: 120px;
+    &_welcome{
+        display: flex;
+        overflow: hidden;
+        &_card{
+            width: 950px;
+            height: 470px;
+            position: relative;
+            margin-right: 10px;
+            margin-left: 10px;
+            &> p{
+                font-family: 'square';
+                font-size: 30px;
+                font-weight: 700;
+                line-height: 52px;
+                position: absolute;
+                top: 40px;
+                max-width: 50%;
+                letter-spacing: 1px;
+                color: $color-light-color-text;
+            }
+            &:first-child{
+                margin-left: 0;
+            }
+            &:last-child{
+                margin-right: 0;
+            }
+            &> img{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            &::before{
+                content: '';
+                background: rgba(0, 0, 0, 0.5);
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+    &_content{
+        margin-top: 50px;
+        margin-bottom: 120px;
+    }
+    &_swiper{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        &_item{
+            height: 350px;
+            width: 400px;
+            background: #f5f5f5;
+            margin-bottom: 20px;
+            padding: 10px;
+            transition: all .3s ease;
+            &> img{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 3px;
+                cursor: pointer;
+                
+            }
+        }
+    }
+    &_modal{
+        width: 50%;
+        height: 90%;
+        position: relative;
+        padding: 50px;
+        background: #050402;
+        animation: set-modal 500ms linear;
+        overflow: hidden;
+        color: white;
+    }
+    &_no_modal{
+        width: 0;
+        height: 0;
+        animation: set-no-modal 500ms linear;
+        overflow: hidden;
+    }
+}
+
+.left_text{
+    right: 50px;
+}
+
+.right_text{
+    left: 50px;
+}
+
+.border{
+    &_gold{
+        border: 2px solid $color-gold;
+    }
+    &_none{
+        border: 2px solid transparent;
+    }
+}
+
+.item-visible{
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.btn_is_visible{
+    opacity: 1;
+    animation: set-btn-modal 500ms linear;
+}
+
+.btn_no_visible{
+    opacity: 0;
+    animation: set-btn-no-modal 500ms linear;
+}
+
+.item_on{
+    opacity: 1;
+    animation: set-item-modal 500ms linear;
+}
+
+.item_off{
+    opacity: 0;
+    animation: set-item-no-modal 500ms linear;
+}
+
+.gallery_modal_item{
+    width: 100%;
+    height: 100%;
+}
+
+.width700{
+    width: 701px;
+}
+
+
+.gallery_record_modal{
+    width: 100%;
+    height: 100%;
+    &> img{
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+}
+
+@media (max-width: 1200px) {
+    .gallery{
+        margin-top: 120px;
+        &_welcome{
+            &_card{
+                width: 374px;
+                height: 299px;
+                &> p{
+                    font-size: 20px;
+                    line-height: 39px;
+                    max-width: 60%;
+                    letter-spacing: 2px;
+                }
+            }
+        }
+        &_swiper{
+            &_item{
+                height: 330px;
+                width: 279px;
+            }
+        }
+        &_modal{
+            width: 90%;
+            height: 70%;
+        }
+    }
+    .width700{
+        width: 389px;
+    }
+
+
+}
+
+@media (max-width: 552px) {
+
+    .gallery{
+        margin-top: 280px;
+        &_welcome{
+            flex-direction: column;
+            &_card{
+                width: 550px;
+                height: 299px;
+                &:last-child{
+                    margin-left: 0;
+                    margin-top: 20px;
+                }
+                &> p{
+                    font-size: 20px;
+                    line-height: 39px;
+                    max-width: 60%;
+                    letter-spacing: 2px;
+                }
+            }
+        }
+        &_swiper{
+            &_item{
+                height: 280px;
+                width: 310px;
+            }
+        }
+        &_modal{
+            width: 100%;
+            height: auto;
+        }
+    }
+    .left_text{
+        right: 0;
+        left: 40px;
+    }
+
+    .width700{
+        width: 289px;
+    }
+
+}

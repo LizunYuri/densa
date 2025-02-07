@@ -1,0 +1,170 @@
+footer{
+    width: 100%;
+    height: 400px;
+    background: $color-background;
+}
+
+.footer{
+    &_container{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    &_line{
+        width: 1px;
+        height: 100%;
+        background: #524336;
+    }
+    &_logo{
+        display: block;
+        width: 186px;
+        height: 67px;
+        margin-bottom: 52px;
+        & > img{
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    }
+    &_right{
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 45%;
+        justify-content: center;
+        padding-left: 52px;
+        position: relative;
+    }
+    &_left{
+        width: 60%;
+        position: relative;
+    }
+    &_contacts{
+        display: flex;
+        align-items: center;
+    }
+    &_phone{
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 30px;
+        color: $color-white-card;
+        display: flex;
+        align-items: center;
+        margin-right: 25px;
+        &> span{
+            margin-left: 25px;
+        }
+    }
+
+    &_address{
+       color: #636B78;
+       font-family: Jost;
+        font-size: 17px;
+        font-weight: 400;
+        line-height: 25.5px;
+        margin-top: 17px;
+        margin-bottom: 17px;
+        display: flex;
+    }
+    &_mail{
+        margin-top: 17px;
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 30px;
+        color: #FAF6F2;
+    }
+    &_links{
+        display: flex;
+    }
+}
+
+.margin30{
+    margin-left: 12px;
+    margin-top: 0;
+
+}
+
+.copyright{
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    display: flex;
+    align-items: center;
+    & > a{
+        color: #636B78;
+        font-size:10px;
+        width: 200px;
+    }
+}
+.company{
+    color: #636B78;
+    font-size: 17px;
+}
+
+@media (max-width: 1200px) {
+    footer{
+        margin-top: 150px;
+        min-height: 600px;
+    }
+    .footer{
+        &_container{
+            flex-direction: column;
+        }
+        &_line{
+            width: 100%;
+            height: 1px;
+        }
+        &_right{
+
+            width: 100%;
+            justify-content: center;
+            padding-left: 52px;
+            position: relative;
+        }
+        &_left{
+            width: 100%;
+            padding-top: 50px;
+            
+        }
+        &_contacts{
+            display: flex;
+            align-items: center;
+        }
+        &_links{
+            margin-top: 50px;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    footer{
+        margin-top: 250px;
+        height: 700px;
+    }
+    
+    .footer{
+        &_line{
+            margin-top: 20px;
+        }
+
+        &_right{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-left: 0px;
+            position: relative;
+        }
+        &_left{
+            width: 60%;
+        }
+        &_contacts{
+            flex-direction: column;
+        }
+        &_address{
+           flex-direction: column;
+        }
+    }
+}
+

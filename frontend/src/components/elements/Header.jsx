@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { FiPhone, FiMail } from "react-icons/fi";
 import DesctopNav from './DesctopNav';
 import { FaTelegramPlane, FaVk, FaWhatsapp } from "react-icons/fa";
-
+import { IoMdClose  } from "react-icons/io";
+import LidForm from '../UX/LidForm';
 
 const Header = () => {
 
@@ -12,6 +13,10 @@ const Header = () => {
   const [topLiveVisible, setTopLineVisible]  = useState(false)
   const [isVisibleTabletMenu, setIsVisibleTabletMenu] = useState(false)
   const [isVisibleItems, setIsVisibleItems] = useState(false)
+  const [openModalVisible, setOpenModalVisible] = useState(false)
+  const [closeModalWindow, setCloseModalWindow] = useState(false)
+  const [childStatus, setChildStatus] = useState(false)
+  const modalheaderRef = useRef(null)
 
   const toggleBurgerMenu = () => {
     setIsOpenBurgerMenu((prev) => !prev)
@@ -30,6 +35,13 @@ const Header = () => {
       setTimeout(() => {
         setIsVisibleItems(false)
       }, 100)
+    }
+  }
+
+  const hendleChildStatus = (data) =>{
+    setChildStatus(data)
+    if(!childStatus){
+      toggleBurgerMenu()
     }
   }
 
@@ -64,6 +76,32 @@ const Header = () => {
     fetchData()
   }, [])
 
+  const openModal = () => {
+    setOpenModalVisible(true)
+    setTimeout(() => {
+      setCloseModalWindow(true)
+    }, 300)
+  }
+
+  const closedModalFunction = () => {
+    setOpenModalVisible(false)
+    setCloseModalWindow(false)
+  }
+
+    useEffect(() => {
+      const handleClickOutside = (event) => {
+        if (modalheaderRef.current && !modalheaderRef.current.contains(event.target)) {
+          closedModalFunction();
+        }
+      };    
+      document.addEventListener('mousedown', handleClickOutside);
+    
+        
+      return () => {
+          document.removeEventListener('mousedown', handleClickOutside);
+      };
+    }, []);
+
   return (
     <header className='header'>
           <div className="container header_block_top header_desktop">
@@ -93,7 +131,7 @@ const Header = () => {
               <div className="header_block_top_left_one">
                   <a href={"mailto:" + company.email}><FiMail /> <span>{company.email}</span></a>
                   <div className='header_block_social'>
-                    <button className='header_block_social_btn'>Получить смету</button>
+                    <button onClick={openModal} className='header_block_social_btn'>Получить смету</button>
                   </div>
               </div>
             
@@ -102,7 +140,6 @@ const Header = () => {
           <div className="container header_block_bottom header_desktop">
             <DesctopNav />
           </div>
-          
           <div className="container header_block_top header_tablet">
             <div className="header_block_top_center">
               <a href="https://денса.рф">
@@ -133,7 +170,7 @@ const Header = () => {
                 </div>
 
                 <div className={`header_nav_mobil ${isVisibleTabletMenu ? 'is_header-visible' : ''}`}>
-                  {isVisibleItems ?  <DesctopNav /> : <div></div>}
+                  {isVisibleItems ?  <DesctopNav isOpenBurger={isOpenBurgerMenu} onDataChange={hendleChildStatus} /> : <div></div>}
                   {isVisibleItems ?  
                     <div className="header_links">
                       <a href={"mailto:" + company.email}><FiMail /> <span>{company.email}</span></a>
@@ -163,10 +200,33 @@ const Header = () => {
                   <div></div>
                 }
                 <div className='header_block_social'>
-                  <button className='header_block_social_btn'>Получить смету</button>
+                  <button onClick={openModal} className='header_block_social_btn'>Получить смету</button>
                 </div>
               </div>
             </div>
+          </div>
+          <div className={`material_modal_start
+            tranition
+            ${openModalVisible ? 'material_modal_finish' : ''}
+            `}>
+              <div 
+                ref={modalheaderRef}
+                className={`
+                  header_modal_body
+                  tranition
+                  ${closeModalWindow ? 'no_opacity' : 'opacity'}
+                `}>
+                <div
+                  onClick={closedModalFunction} 
+                  className={`
+                  materials_modal_close
+                  tranition
+                  btn_is_visible
+                  `}>
+                    <IoMdClose />
+                </div>
+                  <LidForm formTitle={`Получить смету`} />
+              </div>
           </div>
     </header>
   );

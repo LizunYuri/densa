@@ -5,6 +5,10 @@ import './style/Main.scss'
 import LoginPage from "./components/pages/LoginPage";
 import Dashboard from "./components/pages/Dashboard";
 import HomePage from './components/pages/HomePage';
+import Politic from "./components/pages/Politic";
+import NoFound from "./components/pages/NoFound";
+
+
 
 
 function App() {
@@ -14,6 +18,8 @@ function App() {
         <Route path='/' element={<HomePage />} />
         <Route path='/login' element={<LoginPage />} />
         <Route path='/dashboard' element={<Dashboard />} />
+        <Route path='/politic' element={<Politic />} />
+        <Route path='*' element={<NoFound />} />
       </Routes>
     </Router>
   );

@@ -9,7 +9,7 @@ const LigGen = () => {
                 <div className="user_data_container_img">
                 </div>
                 <div className="container user_data_content">
-                    <LidForm />
+                    <LidForm  formTitle={`Узнать больше`}/>
                 </div>
             </div>
         </div>

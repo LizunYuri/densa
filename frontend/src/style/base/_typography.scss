@@ -50,6 +50,18 @@ $color-white-card: #F4F4F4;
     padding-bottom: 30px;
 }
 
+.scroll_to_top{
+    border: 2px solid $color-gold;
+    position: absolute;
+    color: $color-gold;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 26px;
+    padding-right: 26px;
+    top: -50px;
+    right: 50px;
+}
+
 
 @media (max-width: 1200px) {
     .title-typography{
@@ -59,6 +71,11 @@ $color-white-card: #F4F4F4;
                 font-weight: 400;
                 line-height: 65px;
     }
+
+    .scroll_to_top{
+        top: 50px;
+
+    }
 }
 
 @media (max-width: 768px) {
@@ -66,8 +83,23 @@ $color-white-card: #F4F4F4;
                 font-size: 25px;
                 line-height: 32.5px;
     }
+
+    
+    .scroll_to_top{
+        display: none;
+    }
 }
 
 body{
     background: #EEEEEE;
 }
+
+::-webkit-scrollbar{
+    width: 15px;
+    background: rgba(0, 0, 0, 0.658);
+}
+::-webkit-scrollbar-thumb {
+    background: $color-gold;
+    border-radius: 10px; 
+  }
+

@@ -37,7 +37,7 @@ const AboutUpdateRecord = ({ recordId, onRecordUpdated }) => {
     
         const formData = new FormData();
     
-        // Проверяем, изменены ли поля
+
         if (title !== initialData.title) {
             formData.append('title', title);
         }
@@ -45,7 +45,7 @@ const AboutUpdateRecord = ({ recordId, onRecordUpdated }) => {
             formData.append('content', content);
         }
     
-        // Если новый файл выбран, добавляем его
+
         if (newFile) {
             formData.append('file', newFile);
         }

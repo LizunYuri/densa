@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
-import InputMask from "react-input-mask-next";
 
 
-const LidForm = () => {
+const LidForm = ({formTitle}) => {
   const [phone, setPhone] = useState('')
   const [name, setName] = useState('')
   const [is_ofer, setIs_ofer] = useState(true)
@@ -98,68 +97,90 @@ const LidForm = () => {
 
 
   return (
-    <div className={`user_data_body
-      tranition
-      ${statusForm ? 'form_none' : ''}
-      `}>
-      <h3 className='title-typography'>Узнайте больше</h3>
-      <p>Оставьте номер телефона и мы Вам перезвоним</p>
-      <div className={`lid_form`}>
-        <form 
-          onSubmit={handleSubmit}
-          className={`lid_form`}
-          noValidate>
-          {errors.server && <p className="lid_form_message">{errors.server}</p>}
-          <div className="lid_form_group">
-            {errors.name && <p className="lid_form_message">{errors.name}</p>}
-            <label className="lid_form_group_label" htmlFor="name">Имя</label>
-            <input
-              type="text"
-              id="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Введите ваше имя"
-              className="lid_form_group_input"
-            />
-          </div>
-          <div className="lid_form_group">
-            {errors.phone && <p className="lid_form_message">{errors.phone}</p>}
-            <label className="lid_form_group_label" htmlFor="phone">Телефон</label>
-            <input
-            className="lid_form_group_input"
-              type="text"
-              id="phone"
-              value={phone}
-              onChange={handlePhoneChange}
-              placeholder="+7(000)000-00-00"
-            />
-          </div>
-          <div className="lid_form_group">
-            <label className="checkbox-label">
+    <>
+      <div className={`user_data_body
+        tranition
+        ${statusForm ? 'form_none' : ''}
+        `}>
+        <h3 className='title-typography'>{formTitle}</h3>
+        <p>Оставьте номер телефона и мы Вам перезвоним</p>
+        <div className={`lid_form`}>
+          <form 
+            onSubmit={handleSubmit}
+            className={`lid_form`}
+            noValidate>
+            {errors.server && <p className="lid_form_message">{errors.server}</p>}
+            <div className="lid_form_group">
+              {errors.name && <p className="lid_form_message">{errors.name}</p>}
+              <label className="lid_form_group_label" htmlFor="name">Имя</label>
               <input
-                type="checkbox"
-                checked={is_ofer}
-                onChange={handleCheckboxChange}
-                className={`custom-checkbox`}
+                type="text"
+                id="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Введите ваше имя"
+                className="lid_form_group_input"
               />
-              Вы соглашаетесь на обработку ваших персональных данных
-            </label>
-          </div>
-          <div className="lid_form_group">
-            <button type="submit" className="lid_form_btn">
-                  Отправить
-            </button>
-          </div>
-        </form>
-      </div>
-
-      <div className="form_circle">
-        <div className="form_circle_inside">
-          <div className="line"></div>
+            </div>
+            <div className="lid_form_group">
+              {errors.phone && <p className="lid_form_message">{errors.phone}</p>}
+              <label className="lid_form_group_label" htmlFor="phone">Телефон</label>
+              <input
+              className="lid_form_group_input"
+                type="text"
+                id="phone"
+                value={phone}
+                onChange={handlePhoneChange}
+                placeholder="+7(000)000-00-00"
+              />
+            </div>
+            <div className="lid_form_group">
+              <label className="checkbox-label">
+                <input
+                  type="checkbox"
+                  checked={is_ofer}
+                  onChange={handleCheckboxChange}
+                  className={`custom-checkbox`}
+                />
+                Вы соглашаетесь на обработку ваших персональных данных
+              </label>
+            </div>
+            <div className="lid_form_group">
+              <button type="submit" className="lid_form_btn">
+                    Отправить
+              </button>
+            </div>
+          </form>
         </div>
       </div>
+      {statusForm ? (
+      <div className={`user_data_body
+        tranition
+        `}>
+          
+          <div className="sucess-message">
+          <h3 className='title-typography'>Спасибо!</h3>
+            <div className="form_circle">
+                
+                <div className="form_circle_inside">
+                  <div className="line">
+                    <div className="chevron">
+                      <div className="line-left"></div>
+                      <div className="line-right"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <p>В ближайшее время мы Вам перезвоним</p>
+          </div>
+          </div>  
+          ) : (
 
-    </div>
+          <></>
+
+      )}
+    </>
+    
   );
 };
 

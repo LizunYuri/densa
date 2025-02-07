@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { MdArrowLeft, MdArrowRight } from "react-icons/md";
 import SEOtxt from './SEOtxt';
+import { motion } from 'framer-motion';
+
 
 const AboutUs = () => {
   const [equipments, setEquipments] = useState([]);
@@ -94,48 +96,88 @@ const AboutUs = () => {
   }, []);
 
   return (
-    <section className='about' name='about' id='about'>
-      {equipments.length > 0 ? (
-        <div className="container about_parhtners">
-          <h2 classsName='title-typography'>Проверенное оборудование</h2>
-          <div className="parhtners_container">
-            <div onClick={scrollToBackward} className="parhtners_arrow">
+
+      <section className='about' name='about' id='about'>
+        {equipments.length > 0 ? (
+          <div className="container about_parhtners">
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }} 
+              viewport={{ once: true, amount: 0.8 }}  
+              transition={{ duration: 0.8 }} 
+            >
+              <h2 className='title-typography'>Проверенное оборудование</h2>
+            </motion.div>
+            
+            <div className="parhtners_container">
+              <motion.div
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }} 
+                viewport={{ once: true, amount: 1 }}  
+                transition={{ duration: 0.8, delay: 1 }} 
+              >
+                <div onClick={scrollToBackward} className="parhtners_arrow">
               <MdArrowLeft />
-            </div>
-            <div ref={containerRef}
-              onTouchStart={handleTouchStart}
-              onTouchMove={handleTouchMove}
-              onTouchEnd={handleTouchEnd}
-              className="parhtners_table">
-              <div className="parhtners_body">
-                {upperRow.map((item) => (
-                  <div className='parhtners_body_content arrow_top' key={item.id}>
-                    <div className="parhtners_body_card">
-                      <img src={item.url} alt={item.name} />
-                    </div>
-                  </div>
-                ))}
               </div>
-              <div className="parhtners_body">
-                {lowerRow.map((item) => (
-                  <div className='parhtners_body_content arrow_bottom' key={item.id}>
-                    <div className="parhtners_body_card">
-                      <img src={item.url} alt={item.name} />
-                    </div>
+              </motion.div>
+              <div ref={containerRef}
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
+                className="parhtners_table">
+                  <div className="parhtners_body">
+                    {upperRow.map((item, index) => (
+                        <motion.div
+                        key={item.id}
+                        initial={{ opacity: 0, x: 50 }}
+                        whileInView={{ opacity: 1, x: 0 }} 
+                        viewport={{ once: true, amount: 0.7 }}  
+                        transition={{ duration: 0.6, delay: index * 0.2 }}
+                        className='parhtners_body_content arrow_top'
+                      >
+                        <div className="parhtners_body_card">
+                          <img src={item.url} alt={item.name} />
+                        </div>
+                      </motion.div> 
+                    ))}
                   </div>
-                ))}
+                
+                  <div className="parhtners_body">
+                    {lowerRow.map((item, index) => (
+                      <motion.div
+                        key={item.id}
+                        initial={{ opacity: 0, x: -50 }}
+                        whileInView={{ opacity: 1, x: 0 }} 
+                        viewport={{ once: true, amount: 0.7 }}  
+                        transition={{ duration: 0.6, delay: index * 0.2 }}
+                        className='parhtners_body_content arrow_bottom'
+                      >
+                        <div className="parhtners_body_card">
+                          <img src={item.url} alt={item.name} />
+                        </div>
+                      </motion.div> 
+                    ))}
+                  </div>
+                
               </div>
-            </div>
-            <div onClick={scrollToForward} className="parhtners_arrow">
-              <MdArrowRight />
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }} 
+                viewport={{ once: true, amount: 1 }}  
+                transition={{ duration: 0.8, delay: 1 }} 
+              >
+                <div onClick={scrollToForward} className="parhtners_arrow">
+                  <MdArrowRight />
+                </div>
+              </motion.div>
             </div>
           </div>
-        </div>
-      ) : (
-        <div className="container about_parhtners"></div>
-      )}
-      <SEOtxt />
-    </section>
+        ) : (
+          <div className="container about_parhtners"></div>
+        )}
+        <SEOtxt />
+      </section>
+
   );
 };
 

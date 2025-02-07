@@ -2,6 +2,7 @@ from fastapi import APIRouter,  FastAPI, UploadFile, Form, HTTPException, Depend
 from typing import Optional
 from app.database import Database
 from app.readimage import save_image
+from app.auth import get_current_user
 import os
 
 os.makedirs("static/images", exist_ok=True)
@@ -23,6 +24,7 @@ async def upload_image(
         subtitle: str = Form(...),
         content: str = Form(...),
         file: UploadFile = Form(...),
+        current_user : dict = Depends(get_current_user),
         db: Database = Depends(get_database)
 ):
     try:
@@ -68,7 +70,11 @@ async def get_first_screen_images(db: Database = Depends(get_database)):
     
 
 @router.delete("/delete/{table}/{record_id}/")
-async def delete_image(table: str, record_id: int, db: Database = Depends(get_database)):
+async def delete_image(
+    table: str, 
+    record_id: int,
+    current_user: dict = Depends(get_current_user), 
+    db: Database = Depends(get_database)):
     
     record = await db.get_record_id(table, record_id)
     if not record:
@@ -97,7 +103,11 @@ async def delete_image(table: str, record_id: int, db: Database = Depends(get_da
 
 
 @router.get('/{table}/{record_id}/')
-async def get_image(table: str, record_id: int, db: Database = Depends(get_database)):
+async def get_image(
+    table: str, 
+    record_id: int,
+    current_user: dict = Depends(get_current_user), 
+    db: Database = Depends(get_database)):
     
     try:
         record = await db.get_record_id(table, record_id)
@@ -117,6 +127,7 @@ async def update_record_data(
     subtitle: str = Form(...),
     content: str = Form(...),
     file: UploadFile = Form(...),
+    current_user: dict = Depends(get_current_user),
     db: Database = Depends(get_database)
 ):
     

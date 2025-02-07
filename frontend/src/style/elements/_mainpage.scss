@@ -52,8 +52,6 @@
                 line-height: 75px;
                 text-align: left;
                 padding-bottom: 30px;
-                text-underline-position: from-font;
-                text-decoration-skip-ink: none;
                 color: $color-gold;
                 filter: contrast(150%);
             }
@@ -164,7 +162,7 @@
                 align-items: flex-start;
                 justify-content: center;
                 width: 65%;
-                height: calc(100% - 80px);
+                min-height: calc(100% - 80px);
 
             }
         }

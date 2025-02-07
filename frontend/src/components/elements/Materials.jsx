@@ -4,7 +4,7 @@ import { useSwipeable} from "react-swipeable"
 import { PiSwimmingPoolThin } from "react-icons/pi";
 import { IoMdArrowDropleft, IoMdArrowDropright, IoMdClose  } from "react-icons/io";
 import MaterialsRecord from "./MaterialsRecord";
-
+import { motion } from 'framer-motion';
 
 
 const LimitedText = ({ text, limit }) => {
@@ -160,9 +160,23 @@ const Materials = () => {
       {data.length > 0 ? (
         <div className={`materials`}>
           <div className="container about_parhtners">
-            <h2>Услуги</h2>
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }} 
+              viewport={{ once: true, amount: 0.8 }}  
+              transition={{ duration: 0.8 }} 
+            >
+              <h2 className='title-typography'>Услуги</h2>
+            </motion.div>
+            
           </div>
-          <div className="materials_content">
+          <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }} 
+              viewport={{ once: true, amount: 0.4 }}  
+              transition={{ duration: 0.8 }} 
+              className="materials_content"
+              >
             <div
               className="slider_bottom materials_content_btn"
             >
@@ -225,7 +239,7 @@ const Materials = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
           <div className={`material_modal_start
             tranition
             ${modalMaterialsIsOpen ? 'material_modal_finish' : ''}

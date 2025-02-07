@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import UploadFirstScreenRecord from './UploadFirstScreenRecord';
 import { FaWindowClose } from "react-icons/fa";
-import CheckAuthStatus from '../api/CheckAuthStatus';
 import EditFirstScreenRecord from './EditFirstScreenRecord';
 
 const GetRecord = () => {
     const [getRecordFirstScreen, setGetRecordFirstScreen] = useState([])
     const [addModalVisible, setAddModalVisible] = useState(false)
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [deleteModalVisible, setDeleteModalVisible] = useState(false)
     const [deleteNameElement, setDeleteNameElement] = useState({ id: '', title: '' })
     const [deleteMessage, setDeleteMessage] = useState('')
@@ -24,9 +22,6 @@ const GetRecord = () => {
         fetchData()
     }
 
-    const handleAuthStatusChange = (status) => {
-        setIsAuthenticated(status)
-      }
 
     const closeDeleteModalWindow = () => {
         setDeleteModalVisible(false)
@@ -109,9 +104,6 @@ const GetRecord = () => {
 
     return (
         <div className='dashboard_modal'>
-            < CheckAuthStatus onAuthStatusChange={handleAuthStatusChange} />
-            {isAuthenticated ? 
-                <>
                     <h2>Первый экран</h2>
                     <p>Информация отображается при загрузке страницы. Можно использовать любое количеество элементов. Загружаемое изображение должно быть высокого качества с разрешением не меньше 1920х1080.
                     <br /><b>!Внимание! Необходимо минимум одно изображение</b>
@@ -217,9 +209,6 @@ const GetRecord = () => {
                             )}
                         </div>
                     </div>
-
-
-                </> : <></>}
         </div>
     )
 };

@@ -115,10 +115,7 @@ const AboutsUploadWindow = () => {
   return (
 
     <div className='dashboard_modal'>
-    < CheckAuthStatus onAuthStatusChange={handleAuthStatusChange} />
-    {/* {isAuthenticated ? ( */}
-      <>
-        <h2>Раздел "О нас"</h2>
+        <h2>Раздел "Приемущества"</h2>
         <p>Информация блока важна для сео продвижения страницы.<br /><b>!Внимание! при отсутсвии записей данный блок не отображается на сайте</b></p>
         <div className="dashboard_table_add">
           <button onClick={visibleWindow} className="login_btn">
@@ -214,9 +211,6 @@ const AboutsUploadWindow = () => {
               )}
           </div>
         </div>
-      </>
-    {/* // ) : (<></>)} */}
-
     </div>
   );
 };

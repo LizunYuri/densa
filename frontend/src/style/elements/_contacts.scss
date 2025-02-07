@@ -1,0 +1,160 @@
+.contacts{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 120px;
+    &_body{
+        padding-top: 99px;
+        display: flex;
+        overflow: hidden;
+    }
+    &_card{
+        width: 804px;
+        background: #F5F5F5;
+        padding-top: 30px;
+        padding-left: 50px;
+        padding-right: 50px;
+        padding-bottom: 30px;
+        display: flex;
+        &_left{
+            width: 70%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+        }
+        &_tin{
+            & > p {
+                font-size: 17px;
+                font-weight: 700;
+                line-height: 25.5px;
+                text-align: left;
+                &> span{
+                    margin-top: 20px;
+                    font-weight: 400;
+                    line-height: 25.5px;
+                    
+                }
+            }
+        }
+        &_right{
+            display: flex;
+            align-items: self-end;
+            flex-direction: column;
+            width: 30%;
+        }
+        &_link{
+            color: $color-dark-color-text;
+            font-size: 17px;
+            font-weight: 400;
+            line-height: 25.5px;
+            margin-top: 10px;
+            transition: all .3s ease;
+            cursor: pointer;
+            &:hover{
+                color: $color-gold;
+            }
+        }
+        &_mail{
+            font-size: 25px;
+            font-weight: 400;
+            line-height: 37.5px;
+            color: $color-gold;
+            & > span{
+                font-family: 'square';
+                color: $color-dark-color-text;
+            }
+        }
+        &_phone{
+            font-family: 'square';
+            font-size: 25px;
+            font-weight: 700;
+            line-height: 90px;
+            text-align: left;
+            text-underline-position: from-font;
+            text-decoration-skip-ink: none;
+            color: $color-dark-color-text;
+            
+        }
+        &_post{
+            display: flex;
+            flex-direction: column;
+        }
+    }
+    &_form{
+        margin-left: 0;
+        background: #F5F5F5;
+        padding-top: 30px;
+        padding-left: 50px;
+        padding-right: 50px;
+        padding-bottom: 30px;
+    }
+}
+
+
+@media (max-width: 1200px) {
+    .contacts{
+        margin-bottom: 80px;
+        &_body{
+            flex-direction: column;
+        }
+        &_card{
+            width: 100%;
+            height: 508px;
+        }
+    }
+
+}
+
+@media (max-width: 768px) {
+
+    .contacts{
+        margin-bottom: 60px;
+        &_body{
+            flex-direction: column;
+        }
+        &_form{
+            margin-left: 0;
+            margin-top: 25px;
+            padding: 0;
+        }
+        &_card{
+            height: auto;
+            background: #F5F5F5;
+            flex-direction: column;
+            &_left{
+                width: 100%;
+                height: 60%;
+                margin-top: 40px;
+            }
+            &_tin{
+                & > p {
+                    margin-top: 40px;
+                    &> span{
+                        margin-top: 20px;
+                        font-weight: 400;
+                        line-height: 25.5px;
+                        
+                    }
+                }
+            }
+            &_right{
+                width: 100%;
+                padding-top: 50px;
+                align-items: center;
+            }
+            &_link{
+                color: $color-dark-color-text;
+                font-size: 20px;
+            }
+            &_mail{
+                font-size: 12px;
+            }
+            &_phone{
+                font-size: 12px;
+            }
+        }
+    }
+    
+
+}
