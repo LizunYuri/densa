@@ -89,7 +89,7 @@ const SEOtxt = () => {
               variants={slideAnimation}
               className="seo_container_img"
               >
-                <img src={abouts[currentIndex].url} alt={abouts[currentIndex].name} />
+                <img src={abouts[currentIndex].url} alt={abouts[currentIndex].title} />
               </motion.div>
             <div className="container seo_content">
                 <div className="seo_body">
@@ -112,7 +112,7 @@ const SEOtxt = () => {
                     viewport={{ once: true, amount: 0.5 }}  
                     transition={{ duration: 0.8, delay: 1 }} 
                   >
-                    <button onClick={previosSlide} className="prev-btn">
+                    <button aria-label='Листать вперед' onClick={previosSlide} className="prev-btn">
                       <div className="btn_top"></div>
                     </button>
                   </motion.div>
@@ -122,7 +122,7 @@ const SEOtxt = () => {
                     viewport={{ once: true, amount: 0.5 }}  
                     transition={{ duration: 0.8, delay: 1}} 
                   >
-                    <button onClick={nextSlide} className="prev-btn">
+                    <button aria-label='Листать назад' onClick={nextSlide} className="prev-btn">
                       <div className="btn_bottom"></div>
                     </button>
                   </motion.div>

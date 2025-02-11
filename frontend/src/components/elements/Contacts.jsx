@@ -67,9 +67,9 @@ const Contacts = () => {
             </div>   
           </div>
           <div className="contacts_card_right">
-            {company.whatsap ? <a className='contacts_card_link' href={company.whatsap}>whatsApp</a> : <p></p>}
-            {company.vk ? <a className='contacts_card_link' href={company.vk}>vk</a> : <p></p>}
-            {company.telegram ? <a className='contacts_card_link' href={company.telegram}>telegram</a> : <p></p>}  
+            {company.whatsap ? <a aria-label='Денса бассейны в Вацап' className='contacts_card_link' href={company.whatsap}>whatsApp</a> : <p></p>}
+            {company.vk ? <a aria-label='Денса бассейны в VK' className='contacts_card_link' href={company.vk}>vk</a> : <p></p>}
+            {company.telegram ? <a aria-label='Денса бассейны в телеграм' className='contacts_card_link' href={company.telegram}>telegram</a> : <p></p>}  
           </div>   
         </motion.div>
         <motion.div 

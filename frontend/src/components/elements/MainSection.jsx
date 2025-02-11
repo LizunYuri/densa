@@ -107,10 +107,10 @@ const MainSection = () => {
                   <h3 className={`main_slider_content_subtitle transition ${animationDirectionImage ? 'img_novisible' : 'img_visible' }`}>{images[currentIndex].subtitle}</h3>
                   <p className={`main_slider_content_content transition ${animationDirectionImage ? 'img_novisible' : 'img_visible' }`}>{images[currentIndex].content}</p>
                   <div className="main_slider_btn">
-                  <button onClick={previosSlide} className="prev-btn">
+                  <button aria-label='Листать вперед Первый экран' onClick={previosSlide} className="prev-btn">
                       <div className="btn_top"></div>
                   </button>
-                  <button onClick={nextSlide} className="prev-btn">
+                  <button aria-label='Листать назад Первый экран' onClick={nextSlide} className="prev-btn">
                     <div className="btn_bottom"></div>
                   </button> 
                 </div>

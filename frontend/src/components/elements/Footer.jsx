@@ -55,9 +55,9 @@ const Footer = () => {
                 <div className="footer_contacts">
                     <a className='footer_phone' href={"tel:" + company.phone1}><FiPhone /><span>{company.phone1}</span></a>          
                     <div className="footer_links">
-                        {company.whatsap ? <a className='header_nav_links margin30'  href={company.whatsap}><FaWhatsapp /></a> : <p></p>}
-                        {company.vk ? <a className='header_nav_links margin30'  href={company.vk}><FaVk /></a> : <p></p>}
-                        {company.telegram ? <a className='header_nav_links margin30' href={company.telegram}><FaTelegramPlane /></a> : <p></p>}  
+                        {company.whatsap ? <a aria-label='Денса бассейнны в Вацап' className='header_nav_links margin30'  href={company.whatsap}><FaWhatsapp /></a> : <p></p>}
+                        {company.vk ? <a aria-label='Денса бассейнны в ВК' className='header_nav_links margin30'  href={company.vk}><FaVk /></a> : <p></p>}
+                        {company.telegram ? <a aria-label='Денса бассейнны в телеграм' className='header_nav_links margin30' href={company.telegram}><FaTelegramPlane /></a> : <p></p>}  
                     </div>
                     </div>
                 <div className="footer_address">

@@ -1,7 +1,7 @@
 import aiomysql
 from passlib.context import CryptContext
 from typing import Any, Optional
-from .config import MYSQL_DATABASE, MYSQL_HOST, MYSQL_PASSWORD, MYSQL_PORT, MYSQL_USER
+from config import MYSQL_DATABASE, MYSQL_HOST, MYSQL_PASSWORD, MYSQL_PORT, MYSQL_USER
 
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -24,14 +24,16 @@ class Database:
 
     async def connect(self):
         self.pool = await aiomysql.create_pool(
-            host=self.host,
+            # host=self.host,
+            unix_socket='/run/mysqld/mysqld.sock', 
             port=self.port,
             user=self.user,
             password=self.password,
             db=self.db,
+            charset='utf8mb4', 
+            cursorclass=aiomysql.DictCursor,
             autocommit=True,
         )
-        print(f"Connecting to database at {self.host}:{self.port}")
 
     async def create_user(self, 
                           username: str,

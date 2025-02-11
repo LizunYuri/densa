@@ -29,6 +29,7 @@
                     flex-direction: column;
                     justify-content: space-between;
                     align-items: baseline;
+                    margin-top: 16px;
                     & >a{
                         @include link-font;
                         display: flex;

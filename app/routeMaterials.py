@@ -1,8 +1,8 @@
 from fastapi import APIRouter,  FastAPI, UploadFile, Form, HTTPException, Depends
 from typing import Optional
-from app.database import Database
-from app.readimage import save_materials
-from app.auth import get_current_user
+from database import Database
+from readimage import save_materials
+from auth import get_current_user
 import os
 
 os.makedirs("static/materials", exist_ok=True)

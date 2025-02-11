@@ -3,7 +3,7 @@ from jose import JWSError, jwt, JWTError
 from passlib.context import CryptContext
 from pydantic import BaseModel
 from datetime import datetime, timedelta
-from app.database import Database
+from database import Database
 
 
 SECRET_KEY = 'ABvpdgpMtOFlRVHkHVZImd9QJ_coS'

@@ -1,11 +1,11 @@
 from fastapi import APIRouter,  FastAPI, UploadFile, Form, HTTPException, Depends, Body
 from typing import Optional
-from app.database import Database
-from app.readimage import save_materials
-from app.auth import get_current_user
+from database import Database
+from readimage import save_materials
+from auth import get_current_user
 import aiosmtplib
 from email.message import EmailMessage
-from app.config import SMTP_HOST, SMTP_PASSWORD, SMTP_PORT, SMTP_RECIPIENT, SMTP_USER
+from config import SMTP_HOST, SMTP_PASSWORD, SMTP_PORT, SMTP_RECIPIENT, SMTP_USER
 import os
 import logging
 
@@ -83,7 +83,7 @@ async def upload_client_data(
                 {"Да" if is_ofer else "Нет"}
                 """
         await send_email(
-            recipient= 'yu.lizun@yandex.ru',
+            recipient='bassein193@yandex.ru',
             subject= subject,
             body = body,
             )
